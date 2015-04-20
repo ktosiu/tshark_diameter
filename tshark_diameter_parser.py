@@ -182,17 +182,14 @@ def tshark(type,pcapfile):
 	'''
 	tshark_fields = ''
 	json_output_fields = ''
-	count = 0
 	fieldnames = ['time']
 
 	if type == 'CCR':	
 		for i in ccr_selected_fields:
-			count += 1
 			tshark_fields += "-e " + diameter_dictionary[i] + " "
 			fieldnames.extend([i])
 	elif type == 'CCA':
 		for i in cca_selected_fields:
-			count += 1
 			tshark_fields += "-e " + diameter_dictionary[i] + " "
 			fieldnames.extend([i])
 	else:
@@ -221,14 +218,14 @@ def tshark(type,pcapfile):
 	tshark_raw_out.write(output)
 	tshark_raw_out.close()
 
-	''' Read the previusly outputted CSV file and convert it to JSON'''
+	''' Read the previously outputted CSV file and convert it to JSON'''
 	csvfile = open(csv_filename, 'r')
 	jsonfile = open(json_filename, 'w')
 	reader = csv.DictReader(csvfile, fieldnames)
 	for row in reader:
 	    json.dump(row, jsonfile, indent=4,sort_keys=True)
 	    jsonfile.write('\n')
-	    print row
+	    # print row
 
 	jsonfile.close()
 	csvfile.close()
