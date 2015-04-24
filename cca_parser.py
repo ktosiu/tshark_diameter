@@ -119,19 +119,19 @@ def tshark_cca(pcapfile):
 	cca_dict = {}
 	with open(temp_cca_filename) as f:
 	    for line in f:
-	    		line = line.replace("Result-Code", "base_result_code", 1)
-	    		line = line.replace("Result-Code", "nested_result_code", 1)
-		    	g = line.strip().split(' ')
-		    	for h in g:
-		    		i = h.strip().split('=')
-		    		i[0] = i[0].replace("-", "_").lower()
-		    		i[1] = i[1].replace("'", "")
+    		line = line.replace("Result-Code", "base_result_code", 1)
+    		line = line.replace("Result-Code", "nested_result_code", 1)
+	    	g = line.strip().split(' ')
+	    	for h in g:
+	    		i = h.strip().split('=')
+	    		i[0] = i[0].replace("-", "_").lower()
+	    		i[1] = i[1].replace("'", "")
 
-				if i[0] not in ignored_fields:
-					cca_dict[i[0]] = i[1]
+			if i[0] not in ignored_fields:
+				cca_dict[i[0]] = i[1]
 
-			json.dump(cca_dict, jsonfile, indent=4,sort_keys=True)
-			jsonfile.write('\n')
+		json.dump(cca_dict, jsonfile, indent=4,sort_keys=True)
+		jsonfile.write('\n')
 
 	 
 tshark_cca(sys.argv[1])
